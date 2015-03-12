@@ -1,0 +1,8 @@
+Package: networkmountsfix
+Version: 1.0-1
+Architecture: all
+Maintainer: Nobody <nobody@localhost>
+Description: Prevent automatic gvfs network mounting
+ Modifies /usr/share/gvfs/mounts/network.mount
+ to not automatically search for network mounts, which would
+ slow down startup of the Thunar file manager.

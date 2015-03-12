@@ -1,0 +1,14 @@
+#!/bin/sh
+
+set -eu
+
+if [ "$1" = "triggered" ]
+then
+    if [ "$2" = "/usr/share/gvfs/mounts/network.mount" ]
+    then
+        logger "networkmountsfix.postinst: Triggered for /usr/share/gvfs/mounts/network.mount"
+	sed -i 's/^AutoMount=true$/AutoMount=false/' /usr/share/gvfs/mounts/network.mount
+    else
+        logger "networkmountsfix.postinst: Unknown trigger: $2"
+    fi
+fi
