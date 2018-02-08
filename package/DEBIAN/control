@@ -1,8 +1,6 @@
-Package: networkmountsfix
-Version: 1.0-1
+Package: omitriggertest
+Version: 1.0-0
 Architecture: all
 Maintainer: Nobody <nobody@localhost>
-Description: Prevent automatic gvfs network mounting
- Modifies /usr/share/gvfs/mounts/network.mount
- to not automatically search for network mounts, which would
- slow down startup of the Thunar file manager.
+Description: OMI Trigger Test
+ When omiserver is updated, we will touch /tmp/omi_is_updated

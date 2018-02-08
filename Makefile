@@ -1,4 +1,4 @@
-PKGNAME=networkmountsfix
+PKGNAME=omitriggertest
 
 all:
 	chmod 755 package/DEBIAN/postinst
@@ -24,14 +24,13 @@ check:
 install:
 	if [ $$(id -u) -ne 0 ]; then echo WARNING: You are not root.; fi
 	dpkg -i $(PKGNAME)*.deb
-	dpkg-trigger --by-package=gvfs-backends /usr/share/gvfs/mounts/network.mount
+	dpkg-trigger --by-package=omi /opt/omi/bin/omiserver
 	dpkg --triggers-only $(PKGNAME)
 
 checkinstall:
 	dpkg --verify $(PKGNAME)
 	cmp package/DEBIAN/postinst /var/lib/dpkg/info/$(PKGNAME).postinst
-	grep "^/usr/share/gvfs/mounts/network.mount $(PKGNAME)$$" /var/lib/dpkg/triggers/File
-	grep '^AutoMount=false$$' /usr/share/gvfs/mounts/network.mount
+	grep "^/opt/omi/bin/omiserver $(PKGNAME)$$" /var/lib/dpkg/triggers/File
 
 clean:
 	rm -f $(PKGNAME)*.deb
