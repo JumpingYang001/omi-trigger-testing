@@ -1,4 +1,15 @@
-# triggered-edit-deb-package
+# OMI Trigger Tests for RPM and DEB
+
+## rpm trigger test:
+1. run `./makerpm.sh`
+2. rpm -i omitriggertest*.rpm in current directory to install the rpm package
+
+## deb trigger test:
+1. run `make all` to generate the deb package
+2. run `make install` to install the deb package
+
+------------------------------------------------------------------------------------------------------
+
 Debian package that changes a line in a file after each time it has been modified by an upgrade.
 
 In its given form, the package automatically sets `AutoMount=false` in `/usr/share/gvfs/mounts/network.mount`. It can be modified to do similar tasks.
