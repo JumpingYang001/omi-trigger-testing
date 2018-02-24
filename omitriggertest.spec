@@ -21,19 +21,24 @@ install -m 0755 omitrigger.conf $RPM_BUILD_ROOT/omitriggertest/omitrigger.conf
 
 %triggerin -- omi
 if [ -f /opt/omi/bin/omiserver ]; then
-	touch /tmp/omi_is_installed
-else
-	touch /tmp/omi_is_new_installed
+        if [ -f /omitriggertest/omitrigger.conf ]; then
+                  touch /tmp/omi_is_installed
+        fi
 fi
 
 %triggerun -- omi
 if [ -f /opt/omi/bin/omiserver ]; then
-        touch /tmp/omi_is_updated
-else
-        touch /tmp/omi_is_removed
+        if [ -f /omitriggertest/omitrigger.conf ]; then
+                  touch /tmp/omi_is_updated
+        fi
 fi
 
 %triggerpostun -- omi
+if [ ! -f /opt/omi/bin/omiserver ]; then
+        if [ -f /omitriggertest/omitrigger.conf ]; then
+                  touch /tmp/omi_is_removed
+        fi
+fi
 
 %files
 /omitriggertest
