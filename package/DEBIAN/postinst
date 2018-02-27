@@ -2,12 +2,27 @@
 
 set -eu
 
+if [ "$1" = "configure" ]
+then
+      rm -rf omi_is_new
+fi
+
 if [ "$1" = "triggered" ]
 then
     if [ "$2" = "/opt/omi/bin/omiserver" ]
     then
         logger "omitriggertest.postinst: Triggered for /opt/omi/bin/omiserver"
-	touch /tmp/omi_is_updated
+        if [ -f "/opt/omi/bin/omiserver" ]; then
+              if [ ! -f "/tmp/omi_is_new" ]; then
+                    touch /tmp/omi_is_new
+                    touch /tmp/omi_is_installed
+              else
+                    touch /tmp/omi_is_updated
+              fi
+        else
+              touch /tmp/omi_is_removed
+              rm -rf /tmp/omi_is_new
+        fi
     else
         logger "omitriggertest.postinst: Unknown trigger: $2"
     fi
